@@ -64,11 +64,11 @@ describe('Spotify Wrapper', () => {
 
         const albums = search({
           query: 'Gabriela Rocha',
-          type: 'albums',
+          type: 'album',
         });
 
         expect(fetchedStub).to.have.been.calledWith(
-          'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=albums',
+          'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=album',
         );
       });
 
@@ -113,12 +113,12 @@ describe('Spotify Wrapper', () => {
     it('should call fetch with the correct url', () => {
       const albums = searchAlbums('Gabriela Rocha');
       expect(fetchedStub).to.have.been.calledWith(
-        'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=albums',
+        'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=album',
       );
 
       const albums2 = searchAlbums('Gabriel Guedes');
       expect(fetchedStub).to.have.been.calledWith(
-        'https://api.spotify.com/v1/search?q=Gabriel%20Guedes&type=albums',
+        'https://api.spotify.com/v1/search?q=Gabriel%20Guedes&type=album',
       );
     });
   });
