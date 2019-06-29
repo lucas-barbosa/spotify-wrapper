@@ -5,19 +5,31 @@
   "repository": "https://github.com/lucabarbosa/spotify-wrapper.git",
   "author": "Lucas Barbosa <barbosa.lucash@gmail.com> (https://www.github.com/lucabarbosa)",
   "license": "MIT",
+  "nyc": {
+    "functions": 80,
+    "lines": 80,
+    "check-coverage": true,
+    "exclude": [ "tests/**/*.spec.js" ]
+  },
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "lint": "eslint src/**/*.js"
+    "lint": "eslint src/**/*.js",
+    "prepush": "yarn lint && yarn test:coverage",
+    "test": "mocha tests/**/*.spec.js --register @babel/register",
+    "test:tdd": "mocha tests/**/*.spec.js --register @babel/register --watch",
+    "test:coverage": "nyc npm test"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "@babel/register": "^7.4.4",
     "babel-loader": "^8.0.6",
+    "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.18.0",
+    "mocha": "^6.1.4",
     "webpack": "^4.35.0",
     "webpack-cli": "^3.3.5"
   }
