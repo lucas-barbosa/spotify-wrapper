@@ -12,6 +12,17 @@ chai.use(sinonChai);
 sinonStubPromise(sinon);
 
 describe('Spotify Wrapper', () => {
+  let fetchedStub;
+
+  beforeEach(() => {
+    fetchedStub = sinon.stub(global, 'fetch');
+    fetchedStub.resolves({ json: () => {} });
+  });
+
+  afterEach(() => {
+    fetchedStub.restore();
+  });
+
   describe('smoke tests', () => {
     it('should exists the search method', () => {
       expect(search).to.exist;
@@ -35,17 +46,6 @@ describe('Spotify Wrapper', () => {
   });
 
   describe('Generic Search', () => {
-    let fetchedStub;
-
-    beforeEach(() => {
-      fetchedStub = sinon.stub(global, 'fetch');
-      fetchedStub.resolves({ json: () => {} });
-    });
-
-    afterEach(() => {
-      fetchedStub.restore();
-    });
-
     it('should call fetch function', () => {
       const artists = search({ query: '', type: '' });
       expect(fetchedStub).to.have.been.calledOnce;
@@ -82,6 +82,25 @@ describe('Spotify Wrapper', () => {
           'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=artist,album',
         );
       });
+    });
+  });
+
+  describe('searchArtists()', () => {
+    it('should call fetch function', () => {
+      const artists = searchArtists('Gabriela Rocha');
+      expect(fetchedStub).to.have.been.calledOnce;
+    });
+
+    it('should call fetch with the correct url', () => {
+      const artists = searchArtists('Gabriela Rocha');
+      expect(fetchedStub).to.have.been.calledWith(
+        'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=artist',
+      );
+
+      const artists2 = searchArtists('Gabriel Guedes');
+      expect(fetchedStub).to.have.been.calledWith(
+        'https://api.spotify.com/v1/search?q=Gabriel%20Guedes&type=artist',
+      );
     });
   });
 });
