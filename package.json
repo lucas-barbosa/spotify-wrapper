@@ -4,5 +4,13 @@
   "main": "index.js",
   "repository": "https://github.com/lucabarbosa/spotify-wrapper.git",
   "author": "Lucas Barbosa <barbosa.lucash@gmail.com> (https://www.github.com/lucabarbosa)",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint src/**/*.js"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.18.0"
+  }
 }
