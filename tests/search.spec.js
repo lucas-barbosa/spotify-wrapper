@@ -2,17 +2,16 @@ import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import sinonStubPromise from 'sinon-stub-promise';
-import {
-  search, searchAlbums, searchArtists, searchTracks, searchPlaylists,
-} from '../src/main.js';
+import SpotifyWrapper from '../src';
 
 global.fetch = require('node-fetch');
 
 chai.use(sinonChai);
 sinonStubPromise(sinon);
 
-describe('Spotify Wrapper', () => {
+describe('Search', () => {
   let fetchedStub;
+  const spotify = new SpotifyWrapper({ token: 'foo' });
 
   beforeEach(() => {
     fetchedStub = sinon.stub(global, 'fetch');
@@ -24,48 +23,42 @@ describe('Spotify Wrapper', () => {
   });
 
   describe('smoke tests', () => {
-    it('should exists the search method', () => {
-      expect(search).to.exist;
+    it('should exists the search generic method', () => {
+      expect(spotify.search.generic).to.exist;
     });
 
     it('should exists the searchAlbums method', () => {
-      expect(searchAlbums).to.exist;
+      expect(spotify.search.albums).to.exist;
     });
 
     it('should exists the searchArtists method', () => {
-      expect(searchArtists).to.exist;
+      expect(spotify.search.artists).to.exist;
     });
 
     it('should exists the searchTracks method', () => {
-      expect(searchTracks).to.exist;
+      expect(spotify.search.tracks).to.exist;
     });
 
     it('should exists the searchPlaylists method', () => {
-      expect(searchPlaylists).to.exist;
+      expect(spotify.search.playlists).to.exist;
     });
   });
 
   describe('Generic Search', () => {
     it('should call fetch function', () => {
-      const artists = search({ query: '', type: '' });
+      const artists = spotify.search.generic({ query: '', type: '' });
       expect(fetchedStub).to.have.been.calledOnce;
     });
 
     it('should receive the correct url to fetch', () => {
       context('passing only one type', () => {
-        const artists = search({
-          query: 'Gabriela Rocha',
-          type: 'artist',
-        });
+        const artists = spotify.search.generic('artist', 'Gabriela Rocha');
 
         expect(fetchedStub).to.have.been.calledWith(
           'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=artist',
         );
 
-        const albums = search({
-          query: 'Gabriela Rocha',
-          type: 'album',
-        });
+        const albums = spotify.search.generic('album', 'Gabriela Rocha');
 
         expect(fetchedStub).to.have.been.calledWith(
           'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=album',
@@ -73,10 +66,7 @@ describe('Spotify Wrapper', () => {
       });
 
       context('passing more then one type', () => {
-        const artistsAndAlbums = search({
-          query: 'Gabriela Rocha',
-          type: ['artist', 'album'],
-        });
+        const artistsAndAlbums = spotify.search.generic(['artist', 'album'], 'Gabriela Rocha');
 
         expect(fetchedStub).to.have.been.calledWith(
           'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=artist,album',
@@ -85,76 +75,76 @@ describe('Spotify Wrapper', () => {
     });
   });
 
-  describe('searchArtists()', () => {
+  describe('spotify.search.artists()', () => {
     it('should call fetch function', () => {
-      const artists = searchArtists('Gabriela Rocha');
+      const artists = spotify.search.artists('Gabriela Rocha');
       expect(fetchedStub).to.have.been.calledOnce;
     });
 
     it('should call fetch with the correct url', () => {
-      const artists = searchArtists('Gabriela Rocha');
+      const artists = spotify.search.artists('Gabriela Rocha');
       expect(fetchedStub).to.have.been.calledWith(
         'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=artist',
       );
 
-      const artists2 = searchArtists('Gabriel Guedes');
+      const artists2 = spotify.search.artists('Gabriel Guedes');
       expect(fetchedStub).to.have.been.calledWith(
         'https://api.spotify.com/v1/search?q=Gabriel%20Guedes&type=artist',
       );
     });
   });
 
-  describe('searchAlbums()', () => {
+  describe('spotify.search.albums()', () => {
     it('should call fetch function', () => {
-      const albums = searchAlbums('Gabriela Rocha');
+      const albums = spotify.search.albums('Gabriela Rocha');
       expect(fetchedStub).to.have.been.calledOnce;
     });
 
     it('should call fetch with the correct url', () => {
-      const albums = searchAlbums('Gabriela Rocha');
+      const albums = spotify.search.albums('Gabriela Rocha');
       expect(fetchedStub).to.have.been.calledWith(
         'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=album',
       );
 
-      const albums2 = searchAlbums('Gabriel Guedes');
+      const albums2 = spotify.search.albums('Gabriel Guedes');
       expect(fetchedStub).to.have.been.calledWith(
         'https://api.spotify.com/v1/search?q=Gabriel%20Guedes&type=album',
       );
     });
   });
 
-  describe('searchTracks()', () => {
+  describe('spotify.search.tracks()', () => {
     it('should call fetch function', () => {
-      const tracks = searchTracks('Gabriela Rocha');
+      const tracks = spotify.search.tracks('Gabriela Rocha');
       expect(fetchedStub).to.have.been.calledOnce;
     });
 
     it('should call fetch with the correct url', () => {
-      const tracks = searchTracks('Gabriela Rocha');
+      const tracks = spotify.search.tracks('Gabriela Rocha');
       expect(fetchedStub).to.have.been.calledWith(
         'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=track',
       );
 
-      const tracks2 = searchTracks('Gabriel Guedes');
+      const tracks2 = spotify.search.tracks('Gabriel Guedes');
       expect(fetchedStub).to.have.been.calledWith(
         'https://api.spotify.com/v1/search?q=Gabriel%20Guedes&type=track',
       );
     });
   });
 
-  describe('searchPlaylists()', () => {
+  describe('spotify.search.playlists()', () => {
     it('should call fetch function', () => {
-      searchPlaylists('Gabriela Rocha');
+      spotify.search.playlists('Gabriela Rocha');
       expect(fetchedStub).to.have.been.calledOnce;
     });
 
     it('should call fetch with the correct url', () => {
-      searchPlaylists('Gabriela Rocha');
+      spotify.search.playlists('Gabriela Rocha');
       expect(fetchedStub).to.have.been.calledWith(
         'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=playlist',
       );
 
-      searchPlaylists('Gabriel Guedes');
+      spotify.search.playlists('Gabriel Guedes');
       expect(fetchedStub).to.have.been.calledWith(
         'https://api.spotify.com/v1/search?q=Gabriel%20Guedes&type=playlist',
       );
