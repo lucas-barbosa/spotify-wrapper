@@ -1,5 +1,6 @@
 {
   "name": "spotify-wrapper",
+  "description": "A wrapper to work with the Spotify Web Api.",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/lucabarbosa/spotify-wrapper.git",
@@ -9,7 +10,9 @@
     "functions": 80,
     "lines": 80,
     "check-coverage": true,
-    "exclude": [ "tests/**/*.spec.js" ]
+    "exclude": [
+      "tests/**/*.spec.js"
+    ]
   },
   "scripts": {
     "dev": "webpack --mode development",
