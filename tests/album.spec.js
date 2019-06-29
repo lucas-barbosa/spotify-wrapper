@@ -45,4 +45,23 @@ describe('Album', () => {
       );
     });
   });
+
+  describe('getAlbumTracks()', () => {
+    it('should call fetch function', () => {
+      getAlbumTracks();
+      expect(stubedFecth).to.have.been.calledOnce;
+    });
+
+    it('should call the correct url on fetch', () => {
+      getAlbumTracks('05eC68WYd7WNccTVO5Dm9X');
+      expect(stubedFecth).to.have.been.calledWith(
+        'https://api.spotify.com/v1/albums/05eC68WYd7WNccTVO5Dm9X/tracks',
+      );
+
+      getAlbumTracks('5MNtZvAvFWwc6eFbrFLbg9');
+      expect(stubedFecth).to.have.been.calledWith(
+        'https://api.spotify.com/v1/albums/5MNtZvAvFWwc6eFbrFLbg9/tracks',
+      );
+    });
+  });
 });
