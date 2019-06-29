@@ -1,8 +1,9 @@
 import { API_URL } from './config';
+import { toJSON } from './utils';
 
 export function search({ query, type }) {
   const url = `${API_URL}/search?q=${encodeURI(query)}&type=${encodeURI(type)}`;
-  return fetch(url).then(data => data.json());
+  return fetch(url).then(toJSON);
 }
 
 export function searchAlbums(query) {
