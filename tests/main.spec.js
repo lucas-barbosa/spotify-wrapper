@@ -141,4 +141,23 @@ describe('Spotify Wrapper', () => {
       );
     });
   });
+
+  describe('searchPlaylists()', () => {
+    it('should call fetch function', () => {
+      searchPlaylists('Gabriela Rocha');
+      expect(fetchedStub).to.have.been.calledOnce;
+    });
+
+    it('should call fetch with the correct url', () => {
+      searchPlaylists('Gabriela Rocha');
+      expect(fetchedStub).to.have.been.calledWith(
+        'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=playlist',
+      );
+
+      searchPlaylists('Gabriel Guedes');
+      expect(fetchedStub).to.have.been.calledWith(
+        'https://api.spotify.com/v1/search?q=Gabriel%20Guedes&type=playlist',
+      );
+    });
+  });
 });

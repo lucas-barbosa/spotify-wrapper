@@ -17,7 +17,9 @@ function searchTracks(query) {
   return search({ query, type: 'track' });
 }
 
-function searchPlaylists() {}
+function searchPlaylists(query) {
+  return search({ query, type: 'playlist' });
+}
 
 export {
   search, searchAlbums, searchArtists, searchTracks, searchPlaylists,
