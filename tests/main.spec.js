@@ -103,4 +103,42 @@ describe('Spotify Wrapper', () => {
       );
     });
   });
+
+  describe('searchAlbums()', () => {
+    it('should call fetch function', () => {
+      const albums = searchAlbums('Gabriela Rocha');
+      expect(fetchedStub).to.have.been.calledOnce;
+    });
+
+    it('should call fetch with the correct url', () => {
+      const albums = searchAlbums('Gabriela Rocha');
+      expect(fetchedStub).to.have.been.calledWith(
+        'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=albums',
+      );
+
+      const albums2 = searchAlbums('Gabriel Guedes');
+      expect(fetchedStub).to.have.been.calledWith(
+        'https://api.spotify.com/v1/search?q=Gabriel%20Guedes&type=albums',
+      );
+    });
+  });
+
+  describe('searchTracks()', () => {
+    it('should call fetch function', () => {
+      const tracks = searchTracks('Gabriela Rocha');
+      expect(fetchedStub).to.have.been.calledOnce;
+    });
+
+    it('should call fetch with the correct url', () => {
+      const tracks = searchTracks('Gabriela Rocha');
+      expect(fetchedStub).to.have.been.calledWith(
+        'https://api.spotify.com/v1/search?q=Gabriela%20Rocha&type=track',
+      );
+
+      const tracks2 = searchTracks('Gabriel Guedes');
+      expect(fetchedStub).to.have.been.calledWith(
+        'https://api.spotify.com/v1/search?q=Gabriel%20Guedes&type=track',
+      );
+    });
+  });
 });

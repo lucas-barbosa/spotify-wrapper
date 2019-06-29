@@ -5,14 +5,17 @@ function search({ query, type }) {
   return fetch(url).then(data => data.json());
 }
 
-function searchAlbums() {}
-
-function searchArtists(artist) {
-  const url = `${api}/search?q=${encodeURI(artist)}&type=artist`;
-  fetch(url).then(data => data.json());
+function searchAlbums(query) {
+  return search({ query, type: 'albums' });
 }
 
-function searchTracks() {}
+function searchArtists(query) {
+  return search({ query, type: 'artist' });
+}
+
+function searchTracks(query) {
+  return search({ query, type: 'track' });
+}
 
 function searchPlaylists() {}
 
