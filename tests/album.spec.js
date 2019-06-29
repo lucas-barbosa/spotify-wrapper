@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
-import { getAlbum, getAlbumTracks } from '../src/album';
+import { getAlbum, getAlbums, getAlbumTracks } from '../src/album';
 
 chai.use(sinonChai);
 global.fetch = require('node-fetch');
@@ -20,6 +20,10 @@ describe('Album', () => {
   describe('smoke tests', () => {
     it('should exists the getAlbum method', () => {
       expect(getAlbum).to.exist;
+    });
+
+    it('should exists the getAlbums method', () => {
+      expect(getAlbums).to.exist;
     });
 
     it('should exists the getAlbumTracks method', () => {
@@ -42,6 +46,25 @@ describe('Album', () => {
       getAlbum('5MNtZvAvFWwc6eFbrFLbg9');
       expect(stubedFecth).to.have.been.calledWith(
         'https://api.spotify.com/v1/albums/5MNtZvAvFWwc6eFbrFLbg9',
+      );
+    });
+  });
+
+  describe('getAlbums()', () => {
+    it('should call fetch function', () => {
+      getAlbums();
+      expect(stubedFecth).to.have.been.calledOnce;
+    });
+
+    it('should call the correct url on fetch', () => {
+      getAlbums(['05eC68WYd7WNccTVO5Dm9X', '5MNtZvAvFWwc6eFbrFLbg9']);
+      expect(stubedFecth).to.have.been.calledWith(
+        'https://api.spotify.com/v1/albums?ids=05eC68WYd7WNccTVO5Dm9X,5MNtZvAvFWwc6eFbrFLbg9',
+      );
+
+      getAlbums(['05eC68WYd7WNccTVO5Dm9X', '5MNtZvAvFWwc6eFbrFLbg9', '05eC68WYd7WNccTVO5D85X']);
+      expect(stubedFecth).to.have.been.calledWith(
+        'https://api.spotify.com/v1/albums?ids=05eC68WYd7WNccTVO5Dm9X,5MNtZvAvFWwc6eFbrFLbg9,05eC68WYd7WNccTVO5D85X',
       );
     });
   });
