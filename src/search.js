@@ -1,5 +1,7 @@
-import { API_URL } from './config';
-import { toJSON } from './utils';
+function searcher(type, query) {
+  const url = `${this.apiURL}/search?q=${encodeURI(query)}&type=${encodeURI(type)}`;
+  return this.request(url);
+}
 
 export default function search() {
   return {
@@ -9,9 +11,4 @@ export default function search() {
     playlists: searcher.bind(this, 'playlist'),
     tracks: searcher.bind(this, 'track'),
   };
-}
-
-export function searcher(type, query) {
-  const url = `${this.apiURL}/search?q=${encodeURI(query)}&type=${encodeURI(type)}`;
-  return this.request(url);
 }
