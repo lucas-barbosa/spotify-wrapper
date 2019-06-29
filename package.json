@@ -2,7 +2,7 @@
   "name": "spotify-wrapper",
   "description": "A wrapper to work with the Spotify Web Api.",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "https://github.com/lucabarbosa/spotify-wrapper.git",
   "author": "Lucas Barbosa <barbosa.lucash@gmail.com> (https://www.github.com/lucabarbosa)",
   "license": "MIT",
@@ -15,8 +15,11 @@
     ]
   },
   "scripts": {
+    "clean": "rimraf lib",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
+    "build:lib": "yarn clean && babel --out-dir lib src",
+    "build:all": "yarn build && yarn build:lib",
     "lint": "eslint src/**/*.js",
     "prepush": "yarn lint && yarn test:coverage",
     "test": "mocha tests/**/*.spec.js --require @babel/register",
@@ -34,6 +37,7 @@
     "eslint-plugin-import": "^2.18.0",
     "mocha": "^6.1.4",
     "node-fetch": "^2.6.0",
+    "rimraf": "^2.6.3",
     "sinon": "^7.3.2",
     "sinon-chai": "^3.3.0",
     "sinon-stub-promise": "^4.0.0",
