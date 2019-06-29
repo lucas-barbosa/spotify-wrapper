@@ -1,5 +1,7 @@
+import { API_URL } from './config';
+
 export function search({ query, type }) {
-  const url = `https://api.spotify.com/v1/search?q=${encodeURI(query)}&type=${encodeURI(type)}`;
+  const url = `${API_URL}/search?q=${encodeURI(query)}&type=${encodeURI(type)}`;
   return fetch(url).then(data => data.json());
 }
 

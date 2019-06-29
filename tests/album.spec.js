@@ -11,6 +11,7 @@ describe('Album', () => {
 
   beforeEach(() => {
     stubedFecth = sinon.stub(global, 'fetch');
+    stubedFecth.resolves({ json: () => {} });
   });
 
   afterEach(() => {

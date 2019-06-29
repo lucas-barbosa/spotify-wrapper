@@ -1,11 +1,13 @@
+import { API_URL } from './config';
+
 export function getAlbum(id) {
-  fetch(`https://api.spotify.com/v1/albums/${id}`);
+  fetch(`${API_URL}/albums/${id}`).then(data => data.json());
 }
 
 export function getAlbums(ids) {
-  fetch(`https://api.spotify.com/v1/albums?ids=${ids}`);
+  fetch(`${API_URL}/albums?ids=${ids}`).then(data => data.json());
 }
 
 export function getAlbumTracks(id) {
-  fetch(`https://api.spotify.com/v1/albums/${id}/tracks`);
+  fetch(`${API_URL}/albums/${id}/tracks`).then(data => data.json());
 }
