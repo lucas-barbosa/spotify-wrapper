@@ -1,4 +1,5 @@
 # Spotify Wrapper
+[![Build Status](https://travis-ci.org/lucabarbosa/spotify-wrapper.svg?branch=master)](https://travis-ci.org/lucabarbosa/spotify-wrapper)
 
 A wrapper to work with the [Spotify Web Api](https://developer.spotify.com/web-api).  
 Based on [JS com TDD na Prática](https://www.udemy.com/js-com-tdd-na-pratica/), an awesome course.
@@ -153,7 +154,7 @@ spotify.search.playlists('Happy Day')
 
 | Argument | Type    | Options           |  
 |----------|---------|-------------------|  
-|`id`   |*string* | 'Specific id'|  
+|`id`      |*string* | 'Specific id'|  
 
 
 **Example**
@@ -173,7 +174,7 @@ spotify.album.getAlbum('4aawyAB9vmqN3uQ7FjRGTy')
 
 | Argument | Type    | Options           |  
 |----------|---------|-------------------|  
-|`ids`   |*Array of strings* | ['id1', 'id2'  ]|
+|`ids`     |*Array of strings* | ['id1', 'id2'  ]|
 
 **Example**
 
@@ -192,7 +193,7 @@ spotify.album.getAlbums(['4aawyAB9vmqN3uQ7FjRGTy', '1A2GTWGtFfWp7KSQTwWOyo'])
 
 | Argument | Type    | Options           |  
 |----------|---------|-------------------|  
-|`id`   |*string* | 'Specific id'|  
+|`id`      |*string* | 'Specific id'|  
 
 **Example**
 
@@ -210,7 +211,7 @@ spotify.album.getTracks('4aawyAB9vmqN3uQ7FjRGTy')
 **Arguments**
 | Argument | Type    | Options           |  
 |----------|---------|-------------------|  
-|`ids`   |*string* | 'Specific id'|  
+|`ids`     |*string* | 'Specific id'|  
 
 
 **Example**
@@ -229,7 +230,7 @@ spotify.artist.getArtists(['4aawyAB9vmqN3uQ7FjRGTy','dw5asd546asd2c41s5asd5'])
 **Arguments**
 | Argument | Type    | Options           |  
 |----------|---------|-------------------|  
-|`id`   |*string* | 'Specific id'|  
+|`id`      |*string* | 'Specific id'|  
 
 
 **Example**
@@ -248,7 +249,7 @@ spotify.artist.getArtist('4aawyAB9vmqN3uQ7FjRGTy')
 **Arguments**
 | Argument | Type    | Options           |  
 |----------|---------|-------------------|  
-|`id`   |*string* | 'Specific id'|  
+|`id`      |*string* | 'Specific id'|  
 
 
 **Example**
@@ -267,7 +268,7 @@ spotify.artist.getArtistTopTracks('4aawyAB9vmqN3uQ7FjRGTy')
 **Arguments**
 | Argument | Type    | Options           |  
 |----------|---------|-------------------|  
-|`id`   |*string* | 'Specific id'|  
+|`id`      |*string* | 'Specific id'|  
 
 
 **Example**
@@ -286,7 +287,7 @@ spotify.artist.getArtistAlbums('4aawyAB9vmqN3uQ7FjRGTy')
 **Arguments**
 | Argument | Type    | Options           |  
 |----------|---------|-------------------|  
-|`id`   |*string* | 'Specific id'|  
+|`id`      |*string* | 'Specific id'|  
 
 
 **Example**
@@ -305,7 +306,7 @@ spotify.artist.getArtistRelatedArtists('4aawyAB9vmqN3uQ7FjRGTy')
 **Arguments**
 | Argument | Type    | Options           |  
 |----------|---------|-------------------|  
-|`type`   |*string* | 'Only artist at now.'|  
+|`type`    |*string* | 'Only artist at now.'|  
 
 
 **Example**
@@ -324,8 +325,8 @@ spotify.follow.getFollowedArtists('artist')
 **Arguments**
 | Argument | Type    | Options           |  
 |----------|---------|-------------------|  
-|`type`   |*string* | 'artist or user.'|  
-|`ids`    |*string|array* | 'Specific ids' |
+|`type`    |*string* | 'artist or user.'|  
+|`ids`     |*string|array* | 'Specific ids' |
 
 
 **Example**
@@ -342,10 +343,10 @@ spotify.follow.checkIfIFollow({ type: 'user', ids: ['blablabla', 'foofoofoo' ]})
 >	Check if Users Follow a Playlist. Test in [Spotify Web Console](https://developer.spotify.com/console/get-playlist-followers-contains/).
 
 **Arguments**
-| Argument | Type    | Options           |  
-|----------|---------|-------------------|  
-|`playlistId` |*string* | 'playlist id'|  
-|`users`    |*string|array* | 'user ids' |
+| Argument    | Type          | Options           |  
+|-------------|---------      |-------------------|  
+|`playlistId` |*string*       | 'playlist id'|  
+|`users`      |*string|array* | 'user ids' |
 
 
 **Example**
@@ -362,9 +363,9 @@ spotify.follow.checkIfUsersFollowPlaylist({ playlistId: 'as45a51s5c8b1erwd', use
 >	Follow a Playlist. Test in [Spotify Web Console](https://developer.spotify.com/console/put-playlist-followers/).
 
 **Arguments**
-| Argument | Type    | Options           |  
-|----------|---------|-------------------|  
-|`playlistId` |*string* | 'playlist id'|  
+| Argument    | Type     | Options           |  
+|-------------|----------|-------------------|  
+|`playlistId` |*string*  | 'playlist id'|  
 |`isPublic`   |*boolean* | true or false |
 
 
@@ -384,8 +385,8 @@ spotify.follow.followAPlaylist({ playlistId: 'as45a51s5c8b1erwd', isPublic: fals
 **Arguments**
 | Argument | Type    | Options           |
 |----------|---------|-------------------|
-|`type`  |*string* | 'user or artist'|
-|`ids`    |*string|array* | 'user ids' |
+|`type`    |*string* | 'user or artist'|
+|`ids`     |*string|array* | 'user ids' |
 
 
 **Example**
@@ -402,8 +403,8 @@ spotify.follow.followAnUser({ type: 'user', ids: 'blablabla' })
 >	Unfollow a Playlist. Test in [Spotify Web Console](https://developer.spotify.com/console/delete-playlist-followers/).
 
 **Arguments**
-| Argument | Type    | Options           |  
-|----------|---------|-------------------|  
+| Argument     | Type    | Options           |  
+|--------------|---------|-------------------|  
 |`playlistId`  |*string* | 'playlist id'|  
 
 
@@ -421,10 +422,10 @@ spotify.follow.unfollowAPlaylist('blablabla')
 >	Unfollow Artists or Users. Test in [Spotify Web Console](https://developer.spotify.com/console/delete-following/).
 
 **Arguments**
-| Argument | Type    | Options           |  
-|----------|---------|-------------------|  
-|`type`  |*string* | 'user or artist'|  
-|`ids`    |*string|array* | 'user ids' |
+| Argument | Type          | Options           |  
+|----------|---------------|-------------------|  
+|`type`    |*string*       | 'user or artist'|  
+|`ids`     |*string|array* | 'user ids' |
 
 
 **Example**
