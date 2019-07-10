@@ -1,0 +1,14 @@
+language: node_js
+
+node_js:
+  - '10.15.0'
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+before_script:
+  - yarn build:all
+after_success:
+  - yarn test:coverage
